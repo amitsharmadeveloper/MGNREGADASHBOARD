@@ -8,14 +8,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">
-            <img src="{% static 'images/logo.jpg' %}" alt="MGNREGA Logo">
-        </div>
-        <nav>
-            <a href="{% url 'home' %}">Home</a>
-        </nav>
-    </header>
+   <header class="navbar">
+    <div class="logo">
+        <img src="{% static 'images/logo.jpg' %}" alt="MGNREGA Logo">
+    </div>
+
+    <!-- Hamburger Icon (Visible only on Mobile) -->
+    <div class="hamburger" onclick="toggleMenu()">
+        &#9776;
+    </div>
+
+    <nav id="menu">
+        <a href="{% url 'home' %}">Home</a>
+    </nav>
+</header>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("active");
+    }
+</script>
+
 
     <header class="display"> 
         <h1>MGNREGA District Performance</h1>
