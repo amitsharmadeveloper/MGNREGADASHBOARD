@@ -8,7 +8,7 @@ body {
     flex-direction: column;
 }
 
-/* 🔹 Navbar */
+/*  Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -43,6 +43,14 @@ body {
 
 .navbar nav a:hover {
     color: #ff4444;
+}
+
+.hamburger {
+    display: none;
+    font-size: 70px;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 20px;
 }
 
 /* Header */
@@ -161,7 +169,8 @@ table {
     font-size: 0.9rem;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #444;
     padding: 10px;
     text-align: center;
@@ -188,23 +197,25 @@ tr:nth-child(even) {
     font-weight: bold;
 }
 
-/* ✅ Enhanced Responsive Design */
 @media (max-width: 1024px) {
-    
- 
-.logo img {
-    width: 70px;
-    height: 65px;
-}
+
+
+    .logo img {
+        width: 100px;
+        height: 130px;
+    }
+
     body {
         padding: 0px;
         margin: 0px;
         top: 0px;
     }
-    .display{
-        left:20%;
-        right:20%;
+
+    .display {
+        left: 20%;
+        right: 20%;
     }
+
     header h1 {
         font-size: 1.6rem;
     }
@@ -213,7 +224,36 @@ tr:nth-child(even) {
         font-size: 0.9rem;
     }
 
-    /* Make summary cards bigger */
+    .navbar nav {
+        display: none;
+    }
+
+    .navbar nav.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 160px;
+        right: 0;
+        width: 30%;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 25px 0;
+        text-align: center;
+        z-index: 999;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+
+    .navbar nav a {
+        padding: 15px 0;
+        font-size: 40px;
+        border-bottom: 1px solid #222;
+    }
+
+
+    .hamburger {
+        display: block;
+    }
+
+
     .summary-section {
         flex-direction: column;
         align-items: center;
@@ -270,27 +310,31 @@ tr:nth-child(even) {
         font-size: 1rem;
     }
 
-    th, td {
+    th,
+    td {
         padding: 14px;
     }
 }
 
-/* 📱 Extra Responsive — Mobile below 600px */
+
 @media (max-width: 600px) {
-  body{
-    margin: 0px;
-    padding: 0px;
-    top: 0px;
-  }
-.logo img {
-    width: 70px;
-    height: 65px;
-}
-    .display{
-        left:20%;
-        right:20%;
+    body {
+        margin: 0px;
+        padding: 0px;
+        top: 0px;
+    }
+
+    .logo img {
+        width: 100px;
+        height: 130px;
+    }
+
+    .display {
+        left: 20%;
+        right: 20%;
 
     }
+
     header h1 {
         font-size: 1.4rem;
     }
@@ -298,6 +342,31 @@ tr:nth-child(even) {
     header p {
         font-size: 0.85rem;
     }
+
+    .hamburger {
+        display: block;
+    }
+
+    .navbar nav.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 30%;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 25px 0;
+        text-align: center;
+        z-index: 999;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+
+    .navbar nav a {
+        padding: 15px 0;
+        font-size: 40px;
+        border-bottom: 1px solid #222;
+    }
+
 
     .summary-card {
         width: 80%;
@@ -329,9 +398,8 @@ tr:nth-child(even) {
         font-size: 1rem;
     }
 
-    th, td {
+    th,
+    td {
         padding: 12px 8px;
     }
 }
-
-
