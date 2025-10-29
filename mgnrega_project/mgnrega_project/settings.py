@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-g_kkxj6c-nc6x4omwechtec&a*_@ei1e44#_#nggyg9d)$_!$^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.31.90', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
+
 
 
 
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -125,3 +127,6 @@ TEMPLATES[0]['DIRS'] = [BASE_DIR / 'dashboard' / 'templates']
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
