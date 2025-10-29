@@ -8,7 +8,7 @@ body {
     flex-direction: column;
 }
 
-/* 🔹 Navbar */
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -28,7 +28,7 @@ body {
 }
 
 .logo img {
-    width: 60px;
+    width: 100px;
     height: 45px;
 }
 
@@ -44,7 +44,7 @@ body {
     color: #ff4444;
 }
 
-/* 🔹 Main Section */
+/* Main Section */
 .main-section {
     flex-grow: 1;
     display: flex;
@@ -97,7 +97,7 @@ select:hover {
     box-shadow: 0 0 10px #ff4444;
 }
 
-/* 🔹 Button */
+/* Button */
 button {
     margin-top: 10px;
     padding: 12px;
@@ -116,11 +116,25 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* 🔹 Footer */
+/* Footer */
 footer {
     background: rgba(0, 0, 0, 0.9);
     text-align: center;
     padding: 15px 10px;
     font-size: 0.9rem;
     color: #bbb;
+}
+
+@media (max-width: 1024px) {
+    .logo img {
+        width: 60px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .logo img {
+        width: 60px;
+        height: 50px;
+    }
 }
