@@ -212,7 +212,14 @@ tr:nth-child(even) {
     header p {
         font-size: 0.9rem;
     }
-
+    
+    .navbar nav a {
+    text-decoration: none;
+    color: #fff;
+    margin-left: 25px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    }
     /* Make summary cards bigger */
     .summary-section {
         flex-direction: column;
