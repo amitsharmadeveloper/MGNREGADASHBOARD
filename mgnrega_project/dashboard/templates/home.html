@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MGNREGA District Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="icon" type="image/jpg" href="{% static 'images/logo.jpg' %}">
+</head>
+
+<body>
+    <!--NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.jpg' %}" alt="MGNREGA Logo">
+        </div>
+    </header>
+
+    <!--MAIN CONTENT -->
+    <div class="main-section">
+        <div class="content-box">
+            <h1 class="title">Our Voice, Our Rights</h1>
+            <p class="subtitle">Select your State, District, and Month/Year to view MGNREGA Data</p>
+
+            <form id="dataForm" method="get" action="">
+                <div class="dropdowns">
+                    <!-- State -->
+                    <select id="state">
+                        <option value="">-- Select State --</option>
+                    </select>
+
+                    <!-- District -->
+                    <select id="district" style="display:none;">
+                        <option value="">-- Select District --</option>
+                    </select>
+
+                    <!-- Data Type Selection -->
+                    <select id="selectionType" style="display:none;">
+                        <option value="">-- Select Data Type --</option>
+                        <option value="month">Month-wise</option>
+                        <option value="year">Year-wise</option>
+                    </select>
+
+                    <!-- Month Dropdown -->
+                    <select id="month" style="display:none;">
+                        <option value="">-- Select Month --</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+
+                    <!--Year Dropdown-->
+                    <select id="year" style="display:none;">
+                        <option value="">-- Select Financial Year --</option>
+                        <option value="2024-2025">2024-25 (Current Year)</option>
+                        <option value="2023-2024">2023-24</option>
+                        <option value="2022-2023">2022-23</option>
+                        <option value="2021-2022">2021-22</option>
+                        <option value="2020-2021">2020-21</option>
+                        <option value="2019-2020">2019-20</option>
+                        <option value="2018-2019">2018-19</option>
+                    </select>
+
+                    <!--Button-->
+                    <button type="button" id="showDataBtn" style="display:none;">Show Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--FOOTER-->
+    <footer>
+        <p>© 2025 MGNREGA Data Portal | Developed for Transparency and Empowerment</p>
+    </footer>
+
+    <script>
+        const stateDistricts = {
+            "Karnataka": [
+                "Bagalkot", "Ballari", "Belagavi", "Bengaluru Rural", "Bengaluru Urban", "Bidar",
+                "Chamarajanagar", "Chikkaballapur", "Chikkamagaluru", "Chitradurga", "Dakshina Kannada",
+                "Davanagere", "Dharwad", "Gadag", "Hassan", "Haveri", "Kalaburagi", "Kodagu", "Kolar",
+                "Koppal", "Mandya", "Mysuru", "Raichur", "Ramanagara", "Shivamogga", "Tumakuru",
+                "Udupi", "Uttara Kannada", "Vijayapura", "Yadgir"
+            ]
+        };
+
+        const stateSelect = document.getElementById("state");
+        const districtSelect = document.getElementById("district");
+        const selectionType = document.getElementById("selectionType");
+        const monthSelect = document.getElementById("month");
+        const yearSelect = document.getElementById("year");
+        const showDataBtn = document.getElementById("showDataBtn");
+
+        // Populate State Dropdown
+        Object.keys(stateDistricts).forEach(state => {
+            const option = document.createElement("option");
+            option.value = state;
+            option.textContent = state;
+            stateSelect.appendChild(option);
+        });
+
+        // Show District when State selected
+        stateSelect.addEventListener("change", function () {
+            const selectedState = this.value;
+            districtSelect.innerHTML = '<option value="">-- Select District --</option>';
+            if (selectedState && stateDistricts[selectedState]) {
+                stateDistricts[selectedState].forEach(district => {
+                    const option = document.createElement("option");
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+                districtSelect.style.display = "block";
+            } else {
+                districtSelect.style.display = "none";
+                selectionType.style.display = "none";
+                monthSelect.style.display = "none";
+                yearSelect.style.display = "none";
+                showDataBtn.style.display = "none";
+            }
+        });
+
+        // Show Data Type selection when District selected
+        districtSelect.addEventListener("change", function () {
+            if (this.value) {
+                // Always reset month/year visibility before showing selection type
+                monthSelect.style.display = "none";
+                yearSelect.style.display = "none";
+                showDataBtn.style.display = "none";
+
+                selectionType.value = ""; // reset selection
+                selectionType.style.display = "block"; // show only "Month-wise / Year-wise"
+            } else {
+                selectionType.style.display = "none";
+                monthSelect.style.display = "none";
+                yearSelect.style.display = "none";
+                showDataBtn.style.display = "none";
+            }
+        });
+
+        // Show Month/Year based on type
+        selectionType.addEventListener("change", function () {
+            const val = this.value;
+            if (val === "month") {
+                monthSelect.style.display = "block";   // show month first
+                yearSelect.style.display = "block";    // then year
+                showDataBtn.style.display = "block";
+            } else if (val === "year") {
+                monthSelect.style.display = "none";
+                yearSelect.style.display = "block";
+                showDataBtn.style.display = "block";
+            } else {
+                monthSelect.style.display = "none";
+                yearSelect.style.display = "none";
+                showDataBtn.style.display = "none";
+            }
+        });
+
+        // Button click handler
+        showDataBtn.addEventListener("click", function () {
+            const state = stateSelect.value;
+            const district = districtSelect.value;
+            const selection = selectionType.value;
+            const month = monthSelect.value;
+            const year = yearSelect.value;
+
+            if (!state || !district) {
+                alert("⚠️ Please select State and District.");
+                return;
+            }
+
+            if (!selection) {
+                alert("⚠️ Please select Month-wise or Year-wise data type.");
+                return;
+            }
+
+            if (selection === "month" && (!month || !year)) {
+                alert("⚠️ Please select both Month and Year.");
+                return;
+            }
+
+            if (selection === "year" && !year) {
+                alert("⚠️ Please select Year.");
+                return;
+            }
+
+            // Redirect to proper page
+            if (selection === "month") {
+                window.location.href = `/district/${encodeURIComponent(state)}/${encodeURIComponent(district)}/${encodeURIComponent(year)}/${encodeURIComponent(month)}/`;
+            } else {
+                window.location.href = `/district/${encodeURIComponent(state)}/${encodeURIComponent(district)}/${encodeURIComponent(year)}/`;
+            }
+        });
+    </script>
+</body>
+
+</html>
